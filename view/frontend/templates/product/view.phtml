@@ -1,0 +1,44 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php $helper = $this->helper(\Xigen\StockAlert\Helper\View::class); ?>
+<?php /* @var $block \Magento\ProductAlert\Block\Product\View */?>
+
+<div class="product alert <?= $block->getHtmlClass() ?>">
+    <form class="form stockalert"
+          action="<?= $block->escapeUrl($helper->getSaveUrl()); ?>"
+          id="product-alert"
+          method="get"
+          data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>"
+          data-mage-init='{"validation":{}}'>
+
+        <?php if($helper->getProduct()): ?>
+        <input name="product_id" type="hidden" value="<?= $helper->getProduct()->getId(); ?>" />
+        <?php endif; ?>
+
+        <div class="field email required">
+            <div class="control">
+                <input name="email" 
+                       id="email" 
+                       title="<?= $block->escapeHtml(__("Email")); ?>" 
+                       value=""
+                       placeholder="<?= $block->escapeHtml(__("Please enter your email")) ?>"
+                       class="input-text form-control" 
+                       type="email"
+                       data-validate="{required:true, 'validate-email':true}" />
+            </div>
+        </div>
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button type="submit" 
+                        title="<?= $block->escapeHtml(__($block->getSignupLabel())) ?>" 
+                        class="action alert">
+                    <span><?= $block->escapeHtml(__($block->getSignupLabel())) ?></span>
+                </button>
+            </div>
+        </div>
+    </form>    
+</div>
