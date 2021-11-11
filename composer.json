@@ -3,7 +3,7 @@
     "description": "Allow stock alerts to be added via email on product page instead of requiring login",
     "type": "magento2-module",
     "license": "GPL-3.0",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "authors": [
         {
             "name": "Dominic Xigen",
