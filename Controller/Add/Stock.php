@@ -12,14 +12,14 @@ use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\RequestInterface;
+use Magento\Framework\App\Response\RedirectInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Framework\View\Result\PageFactory;
-use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\Message\ManagerInterface as MessageManager;
+use Magento\Framework\View\Result\PageFactory;
 use Magento\ProductAlert\Model\StockFactory;
-use Magento\Framework\App\Response\RedirectInterface;
+use Magento\Store\Model\StoreManagerInterface;
 
 class Stock implements HttpGetActionInterface
 {
@@ -47,7 +47,7 @@ class Stock implements HttpGetActionInterface
      * @var \Magento\Framework\App\RequestInterface
      */
     protected $request;
-    
+
     /**
      * @var \Magento\Framework\Controller\ResultFactory
      */
@@ -132,12 +132,14 @@ class Stock implements HttpGetActionInterface
                 ->setProductId($product->getId())
                 ->setWebsiteId($store->getWebsiteId())
                 ->setStoreId($store->getId());
-            
+
             $model->save();
 
             $this->messageManager->addSuccessMessage(__('Alert subscription has been saved.'));
         } catch (NoSuchEntityException $noEntityException) {
-            $this->messageManager->addErrorMessage(__('To add a stock alert you need a customer account with the email you have provided.'));
+            $this->messageManager->addErrorMessage(
+                __('To add a stock alert you need a customer account with the email you have provided.')
+            );
         } catch (\Exception $e) {
             $this->messageManager->addExceptionMessage(
                 $e,

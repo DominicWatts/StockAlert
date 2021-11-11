@@ -15,8 +15,10 @@
           data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>"
           data-mage-init='{"validation":{}}'>
 
-        <?php if($helper->getProduct()): ?>
-        <input name="product_id" type="hidden" value="<?= $helper->getProduct()->getId(); ?>" />
+        <?php if ($helper->getProduct()): ?>
+        <input name="product_id" 
+               type="hidden" 
+               value="<?= $block->escapeHtmlAttr($helper->getProduct()->getId()); ?>" />
         <?php endif; ?>
 
         <div class="field email required">
